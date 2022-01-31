@@ -111,7 +111,7 @@ class _MyAppState extends State<MyApp> {
                       onPressed: () {},
                       color: Colors.grey[100],
                       child: Text(
-                          '${formatter.format(duration%3600/60)}:${formatter.format(duration%60)}/ ${formatter.format(total%3600/60)}:${formatter.format(total%60)}'),
+                          '${formatter.format(duration/1000/60)}:${formatter.format(duration/1000%60)}/ ${formatter.format(total/1000/60)}:${formatter.format(total/1000%60)}'),
                     ),
                   ),
                 ],
