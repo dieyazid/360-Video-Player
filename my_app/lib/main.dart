@@ -36,8 +36,7 @@ class _App extends StatelessWidget {
         child: Column(
           children: [
             _BumbleBeeRemoteVideo(
-                url:
-                    'https://videojs-vr.netlify.app/samples/eagle-360.mp4',
+                url: 'https://github.com/medbenzekri/360_samples/blob/main/Lions%20360%C2%B0%20_%20National%20Geographic%20%5BsPyAQQklc1s%5D.mp4?raw=true',
                 mediaFormat: MediaFormat.VR2D360),
           ],
         ),
@@ -66,6 +65,7 @@ Vector3 _magnetometer = Vector3.zero();
 Vector3 _accelerometer = Vector3.zero();
 Vector3 _absoluteOrientation = Vector3.zero();
 int interval = Duration.microsecondsPerSecond ~/ 60;
+double x = 0, y = 0, z = 0;
 
 class _BumbleBeeRemoteVideoState extends State<_BumbleBeeRemoteVideo> {
   late VideoPlayerController _controller;
@@ -102,13 +102,13 @@ class _BumbleBeeRemoteVideoState extends State<_BumbleBeeRemoteVideo> {
         var matrix =
             motionSensors.getRotationMatrix(_accelerometer, _magnetometer);
         _absoluteOrientation.setFrom(motionSensors.getOrientation(matrix));
-        double x = degrees(_absoluteOrientation[0]),
-            y = degrees(_absoluteOrientation[1]),
-            z = degrees(_absoluteOrientation[2]);
-        _controller.setCameraRotation(0, 0, x);
-        if (kDebugMode) {
-          print("x=$x y=$y z=$z \r\n");
-        }
+
+        x =  degrees(_absoluteOrientation.x)+x/2;
+        y = degrees(_absoluteOrientation.y)+y/2;
+        z = degrees(_absoluteOrientation.z)+z/2;
+        _controller.setCameraRotation(0, y+90, x);
+          //print("x=$x y=$y z=$z \r\n");
+      
       });
     });
   }
@@ -208,6 +208,7 @@ class _ControlsOverlay extends StatelessWidget {
             _cameraPitch += sr * touchX + cr * touchY;
             _cameraPitch = max(-45, min(45, _cameraPitch));
             controller.setCameraRotation(0.0, _cameraPitch, _cameraYaw);
+            
           },
         ),
         Align(
