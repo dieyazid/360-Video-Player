@@ -31,7 +31,7 @@ class _App extends StatelessWidget {
     return Scaffold(
       key: const ValueKey<String>('home_page'),
       appBar: AppBar(
-        title: const Text('Video player  example'),
+        title: const Text('Video player example'),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -93,21 +93,20 @@ class _BumbleBeeRemoteVideoState extends State<_BumbleBeeRemoteVideo> {
     motionSensors.magnetometerUpdateInterval = interval;
 
     motionSensors.accelerometer.listen((AccelerometerEvent event) {
-      setState(
-          () => _accelerometer = applyLowPassFilter(event, _accelerometer));
+      setState(() => _accelerometer= applyLowPassFilter(event, _accelerometer));
     });
 
     motionSensors.magnetometer.listen((MagnetometerEvent event) {
       setState(() {
-        _magnetometer = applyLowPassFilter(event, _magnetometer);
+        _magnetometer= applyLowPassFilter(event, _magnetometer);
         var matrix =
             motionSensors.getRotationMatrix(_accelerometer, _magnetometer);
         _absoluteOrientation.setFrom(motionSensors.getOrientation(matrix));
 
-        x = degrees(_absoluteOrientation.x);
-        y = degrees(_absoluteOrientation.y);
+        x =  degrees(_absoluteOrientation.x);
+        y =  degrees(_absoluteOrientation.y);
         z = degrees(_absoluteOrientation.z);
-        _controller.setCameraRotation(0, -y + 90, x);
+        _controller.setCameraRotation(0, -y+90, x);
         if (kDebugMode) {
           print("x=$x y=$y z=$z \r\n");
         }
