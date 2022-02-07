@@ -1,0 +1,31 @@
+{
+    "saveAndRunExt": {
+        "commands": [
+            {
+                "match": ".pug",
+                "isShellCommand" : false,
+                "cmd": "flutter.hotReload"
+            },
+            {
+                "match": ".sass",
+                "isShellCommand" : false,
+                "cmd": "flutter.hotReload"
+            },
+            {
+                "match": ".css",
+                "isShellCommand" : false,
+                "cmd": "flutter.hotReload"
+            },
+            {
+                "match": ".html",
+                "isShellCommand" : false,
+                "cmd": "flutter.hotReload"
+            },
+            {
+                "match": ".htm",
+                "isShellCommand" : false,
+                "cmd": "flutter.hotReload"
+            }
+        ]
+    },
+}
