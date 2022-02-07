@@ -9,7 +9,8 @@
 
 import 'dart:async';
 import 'dart:math';
-
+import 'dart:ui';
+import 'lowpass.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player_extra/video_player_extra.dart';
@@ -36,7 +37,8 @@ class _App extends StatelessWidget {
         child: Column(
           children: [
             _BumbleBeeRemoteVideo(
-                url: 'https://github.com/medbenzekri/360_samples/blob/main/Lions%20360%C2%B0%20_%20National%20Geographic%20%5BsPyAQQklc1s%5D.mp4?raw=true',
+                url:
+                    'https://github.com/medbenzekri/360_samples/blob/main/Lions%20360%C2%B0%20_%20National%20Geographic%20%5BsPyAQQklc1s%5D.mp4?raw=true',
                 mediaFormat: MediaFormat.VR2D360),
           ],
         ),
@@ -65,7 +67,7 @@ Vector3 _magnetometer = Vector3.zero();
 Vector3 _accelerometer = Vector3.zero();
 Vector3 _absoluteOrientation = Vector3.zero();
 int interval = Duration.microsecondsPerSecond ~/ 60;
-double x = 0, y = 0, z = 0;
+double x = 0, y = 0, z = 0, smoothSpeed = 0.125;
 
 class _BumbleBeeRemoteVideoState extends State<_BumbleBeeRemoteVideo> {
   late VideoPlayerController _controller;
@@ -91,24 +93,23 @@ class _BumbleBeeRemoteVideoState extends State<_BumbleBeeRemoteVideo> {
     motionSensors.magnetometerUpdateInterval = interval;
 
     motionSensors.accelerometer.listen((AccelerometerEvent event) {
-      setState(() {
-        _accelerometer.setValues(event.x, event.y, event.z);
-      });
+      setState(() => _accelerometer= applyLowPassFilter(event, _accelerometer));
     });
 
     motionSensors.magnetometer.listen((MagnetometerEvent event) {
       setState(() {
-        _magnetometer.setValues(event.x, event.y, event.z);
+        _magnetometer= applyLowPassFilter(event, _magnetometer);
         var matrix =
             motionSensors.getRotationMatrix(_accelerometer, _magnetometer);
         _absoluteOrientation.setFrom(motionSensors.getOrientation(matrix));
 
-        x =  degrees(_absoluteOrientation.x)+x/2;
-        y = degrees(_absoluteOrientation.y)+y/2;
-        z = degrees(_absoluteOrientation.z)+z/2;
-        _controller.setCameraRotation(0, y+90, x);
-          //print("x=$x y=$y z=$z \r\n");
-      
+        x =  degrees(_absoluteOrientation.x);
+        y =  degrees(_absoluteOrientation.y);
+        z = degrees(_absoluteOrientation.z);
+        _controller.setCameraRotation(0, -y+90, x);
+        if (kDebugMode) {
+          print("x=$x y=$y z=$z \r\n");
+        }
       });
     });
   }
@@ -208,7 +209,6 @@ class _ControlsOverlay extends StatelessWidget {
             _cameraPitch += sr * touchX + cr * touchY;
             _cameraPitch = max(-45, min(45, _cameraPitch));
             controller.setCameraRotation(0.0, _cameraPitch, _cameraYaw);
-            
           },
         ),
         Align(
