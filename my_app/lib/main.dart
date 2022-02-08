@@ -1,10 +1,10 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:file_picker/file_picker.dart';
+import 'package:file_manager/file_manager.dart';
 
 const c_green = Color(0xFF45cbb8);
+const g = Color.fromARGB(146, 189, 209, 206);
 void main() {
   runApp(MyApp());
 }
@@ -44,21 +44,39 @@ class Cloud extends StatelessWidget {
 }
 
 class Local extends StatelessWidget {
+  final FileManagerController controller = FileManagerController();
   late File file;
   @override
-  Widget build(BuildContext context) {
-    Future<FilePickerResult?> result = FilePicker.platform.pickFiles();
-    result.then((value) {
-      if (value != null) {
-          String? path = value.files.single.path;
-        if (path != null) {
-          file = File(path);
-        }
-      }
-    });
-
-    return Scaffold(body: Container(child: Text(file.path)));
-  }
+  Widget build(BuildContext context) => Scaffold(
+        body: FileManager(
+          controller: controller,
+          builder: (context, snapshot) {
+            final List<FileSystemEntity> entities = snapshot;
+            return ListView.builder(
+              itemCount: entities.length,
+              itemBuilder: (context, index) {
+                return Card(
+                  child: ListTile(
+                    leading: FileManager.isFile(entities[index])
+                        ? Icon(Icons.feed_outlined)
+                        : Icon(Icons.folder),
+                    title: Text(FileManager.basename(entities[index])),
+                    onTap: () {
+                      if (FileManager.isDirectory(entities[index])) {
+                        controller
+                            .openDirectory(entities[index]); // open directory
+                      } else {
+                        file = File(entities[index].path);
+                        print(file.path);
+                      }
+                    },
+                  ),
+                );
+              },
+            );
+          },
+        ),
+      );
 }
 
 class HomePages extends State<HomePage> {
@@ -84,38 +102,38 @@ class HomePages extends State<HomePage> {
             selectedIndex: index,
             onDestinationSelected: (index) =>
                 setState(() => this.index = index),
-            destinations: [
+            destinations: const [
               NavigationDestination(
                 icon: Icon(
                   Icons.home,
-                  color: Colors.white,
+                  color: g,
                 ),
                 label: 'Home',
                 selectedIcon: Icon(
                   Icons.home,
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
               ),
               NavigationDestination(
                 icon: Icon(
                   Icons.cloud,
-                  color: Colors.white,
+                  color: g,
                 ),
                 label: 'Cloud',
                 selectedIcon: Icon(
                   Icons.cloud,
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
               ),
               NavigationDestination(
                 icon: Icon(
                   Icons.folder,
-                  color: Colors.white,
+                  color: g,
                 ),
                 label: 'Local',
                 selectedIcon: Icon(
                   Icons.folder,
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
               ),
             ],
