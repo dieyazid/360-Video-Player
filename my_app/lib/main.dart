@@ -38,7 +38,7 @@ class _App extends StatelessWidget {
           children: [
             _BumbleBeeRemoteVideo(
                 url:
-                    'https://github.com/medbenzekri/360_samples/blob/main/Lions%20360%C2%B0%20_%20National%20Geographic%20%5BsPyAQQklc1s%5D.mp4?raw=true',
+                    'https://videos-fms.jwpsrv.com/0_620157df_0x8172f1b010a083d50b4be32afd3b9a2146c53a21/content/conversions/Z3KUO9jB/videos/wddsCiBt-25660668.mp4',
                 mediaFormat: MediaFormat.VR2D360),
           ],
         ),
@@ -71,7 +71,6 @@ double x = 0, y = 0, z = 0, smoothSpeed = 0.125;
 
 class _BumbleBeeRemoteVideoState extends State<_BumbleBeeRemoteVideo> {
   late VideoPlayerController _controller;
-  late final StreamSubscription _streamSubscription;
   @override
   void initState() {
     super.initState();
@@ -91,26 +90,35 @@ class _BumbleBeeRemoteVideoState extends State<_BumbleBeeRemoteVideo> {
 
     motionSensors.accelerometerUpdateInterval = interval;
     motionSensors.magnetometerUpdateInterval = interval;
+    motionSensors.orientationUpdateInterval = interval;
 
-    motionSensors.accelerometer.listen((AccelerometerEvent event) {
-      setState(() => _accelerometer= applyLowPassFilter(event, _accelerometer));
-    });
+    // motionSensors.accelerometer.listen((AccelerometerEvent event) {
+    //   setState(
+    //       () => _accelerometer = applyLowPassFilter(event, _accelerometer));
+    // });
 
-    motionSensors.magnetometer.listen((MagnetometerEvent event) {
-      setState(() {
-        _magnetometer= applyLowPassFilter(event, _magnetometer);
-        var matrix =
-            motionSensors.getRotationMatrix(_accelerometer, _magnetometer);
-        _absoluteOrientation.setFrom(motionSensors.getOrientation(matrix));
+    // motionSensors.magnetometer.listen((MagnetometerEvent event) {
+    //   setState(() {
+    //     _magnetometer = applyLowPassFilter(event, _magnetometer);
+    //     var matrix =
+    //         motionSensors.getRotationMatrix(_accelerometer, _magnetometer);
+    //     _absoluteOrientation.setFrom(motionSensors.getOrientation(matrix));
 
-        x =  degrees(_absoluteOrientation.x);
-        y =  degrees(_absoluteOrientation.y);
-        z = degrees(_absoluteOrientation.z);
-        _controller.setCameraRotation(0, -y+90, x);
-        if (kDebugMode) {
-          print("x=$x y=$y z=$z \r\n");
-        }
-      });
+    //     x = degrees(_absoluteOrientation.x)+_cameraPitch;
+    //     y = degrees(_absoluteOrientation.y)+_cameraPitch;
+    //     z = degrees(_absoluteOrientation.z);
+    //     _controller.setCameraRotation(0,-y + 90, x);
+    //       //print("x=$x y=$y z=$z \r\n");
+    //   });
+    // });
+    motionSensors.orientation.listen((event) {
+      _absoluteOrientation = applyLowPassFilter(event, _absoluteOrientation);
+      x = degrees(_absoluteOrientation[0]);
+      y = degrees(_absoluteOrientation[1]);
+      z = degrees(_absoluteOrientation[2]);
+      _controller.setCameraRotation(z, 0, x);
+      print(
+          "roll=${degrees(event.roll)} pitch=${degrees(event.pitch)} yaw=${degrees(event.yaw)} \r");
     });
   }
 
@@ -208,7 +216,7 @@ class _ControlsOverlay extends StatelessWidget {
             _cameraYaw -= cr * touchX - sr * touchY;
             _cameraPitch += sr * touchX + cr * touchY;
             _cameraPitch = max(-45, min(45, _cameraPitch));
-            controller.setCameraRotation(0.0, _cameraPitch, _cameraYaw);
+            //controller.setCameraRotation(0.0, _cameraPitch, _cameraYaw);
           },
         ),
         Align(
