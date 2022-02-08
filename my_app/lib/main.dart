@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:file_picker/file_picker.dart';
 
 const c_green = Color(0xFF45cbb8);
 void main() {
@@ -41,8 +44,21 @@ class Cloud extends StatelessWidget {
 }
 
 class Local extends StatelessWidget {
+  late File file;
   @override
-  Widget build(BuildContext context) => Scaffold(body: Container());
+  Widget build(BuildContext context) {
+    Future<FilePickerResult?> result = FilePicker.platform.pickFiles();
+    result.then((value) {
+      if (value != null) {
+          String? path = value.files.single.path;
+        if (path != null) {
+          file = File(path);
+        }
+      }
+    });
+
+    return Scaffold(body: Container(child: Text(file.path)));
+  }
 }
 
 class HomePages extends State<HomePage> {
@@ -55,7 +71,7 @@ class HomePages extends State<HomePage> {
         body: pages[index],
         bottomNavigationBar: NavigationBarTheme(
           data: NavigationBarThemeData(
-              indicatorColor: Color(0xFFfff4eb),
+              //indicatorColor: Color(0xFFfff4eb),
               height: 60,
               backgroundColor: c_green,
               labelTextStyle: MaterialStateProperty.all(
