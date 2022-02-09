@@ -1,6 +1,9 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/screens/all.dart';
+
 const c_green = Color(0xFF45cbb8);
 const g = Color.fromARGB(230, 189, 209, 206);
 void main() {
@@ -16,11 +19,6 @@ class MyApp extends StatelessWidget {
         home: HomePage());
   }
 }
-
-
-
-
-
 
 class HomePage extends StatefulWidget {
   @override
@@ -110,7 +108,7 @@ class SearchSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100,
+      height: 90,
       color: const Color(0xFFeaeaea),
       padding: const EdgeInsets.fromLTRB(10, 25, 10, 10),
       child: Column(
@@ -178,11 +176,98 @@ class SearchSection extends StatelessWidget {
 }
 
 class VideoSection extends StatelessWidget {
+  final List Videos = [
+    {'title': '360 Video',
+    'picture':'images/wallhaven-wqvyxx.png',
+    'duration':'0:20'},
+    {'title': '360 Video',
+    'picture':'images/wallhaven-m9rkkm.jpg',
+    'duration':'0:35'}
+  ];
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 2000,
-      color: Colors.white,
+        padding: EdgeInsets.all(10),
+        color: Colors.white,
+        child: Column(
+          children: Videos.map((video) {
+            return VideoCard(video);
+          }).toList(),
+        ));
+  }
+}
+
+class VideoCard extends StatelessWidget {
+  final Map videoData;
+  VideoCard(this.videoData);
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(10),
+      height: 210,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.all(Radius.circular(18)),
+        boxShadow: [
+          BoxShadow(
+          color: Colors.grey.shade200,
+          spreadRadius: 4,
+          blurRadius: 6,
+          offset: Offset(0,3),
+        )
+        ]),
+        child: Column(
+          children: [
+          Container(
+            height: 140,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(
+                  videoData['picture']
+              ),
+                fit: BoxFit.cover,
+              )
+            ),
+            child: 
+            Stack(children: [
+              Positioned(
+                top: 5,
+                right: -15,
+                child: MaterialButton(
+                color: Colors.white,
+                shape: CircleBorder(),
+                onPressed: (){},
+                child: Icon(
+                  Icons.play_arrow,
+                  color: c_green,
+                  size: 20,
+                ), ))
+            ],),
+          ),
+          Container(
+            margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(videoData['title'],
+                style: GoogleFonts.nunito(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w800
+                ),),
+                Text(videoData['duration'],
+                style: GoogleFonts.nunito(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w800
+                ),),
+              ],
+            ),
+          )
+
+        ]) ,
+      
+      //child: Image.asset(videoData['picture']
+      //)
     );
   }
 }
