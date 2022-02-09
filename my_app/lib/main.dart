@@ -1,10 +1,8 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:file_manager/file_manager.dart';
-
+import 'package:myapp/screens/all.dart';
 const c_green = Color(0xFF45cbb8);
-const g = Color.fromARGB(146, 189, 209, 206);
+const g = Color.fromARGB(230, 189, 209, 206);
 void main() {
   runApp(MyApp());
 }
@@ -19,81 +17,31 @@ class MyApp extends StatelessWidget {
   }
 }
 
+
+
+
+
+
 class HomePage extends StatefulWidget {
   @override
   HomePages createState() => HomePages();
 }
 
-class Home extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) => Scaffold(
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              SearchSection(),
-              VideoSection(),
-            ],
-          ),
-        ),
-      );
-}
-
-class Cloud extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) => Scaffold(body: Container());
-}
-
-class Local extends StatelessWidget {
-  final FileManagerController controller = FileManagerController();
-  late File file;
-  @override
-  Widget build(BuildContext context) => Scaffold(
-        body: FileManager(
-          controller: controller,
-          builder: (context, snapshot) {
-            final List<FileSystemEntity> entities = snapshot;
-            return ListView.builder(
-              itemCount: entities.length,
-              itemBuilder: (context, index) {
-                return Card(
-                  child: ListTile(
-                    leading: FileManager.isFile(entities[index])
-                        ? Icon(Icons.feed_outlined)
-                        : Icon(Icons.folder),
-                    title: Text(FileManager.basename(entities[index])),
-                    onTap: () {
-                      if (FileManager.isDirectory(entities[index])) {
-                        controller
-                            .openDirectory(entities[index]); // open directory
-                      } else {
-                        file = File(entities[index].path);
-                        print(file.path);
-                      }
-                    },
-                  ),
-                );
-              },
-            );
-          },
-        ),
-      );
-}
-
 class HomePages extends State<HomePage> {
   @override
   int index = 0;
-  final pages = [Home(), Cloud(), Local()];
+  final pages = [Home(), Cloud(), const Local()];
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: MyAppBar(),
         body: pages[index],
         bottomNavigationBar: NavigationBarTheme(
           data: NavigationBarThemeData(
-              //indicatorColor: Color(0xFFfff4eb),
+              indicatorColor: Color(0xFFfff4eb),
               height: 60,
               backgroundColor: c_green,
               labelTextStyle: MaterialStateProperty.all(
-                TextStyle(
+                const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
                     color: Colors.white),
@@ -163,40 +111,40 @@ class SearchSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 100,
-      color: Color(0xFFeaeaea),
-      padding: EdgeInsets.fromLTRB(10, 25, 10, 10),
+      color: const Color(0xFFeaeaea),
+      padding: const EdgeInsets.fromLTRB(10, 25, 10, 10),
       child: Column(
         children: [
           Row(
             children: [
               Expanded(
                   child: Container(
-                padding: EdgeInsets.only(left: 5),
+                padding: const EdgeInsets.only(left: 5),
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(30),
                     boxShadow: [
-                      BoxShadow(
+                      const BoxShadow(
                         color: Colors.grey,
                         blurRadius: 5,
-                        offset: Offset(0, 1),
+                        offset: const Offset(0, 1),
                       )
                     ]),
-                child: TextField(
+                child: const TextField(
                   decoration: InputDecoration(
                     hintText: 'Video title',
-                    contentPadding: EdgeInsets.all(10),
+                    contentPadding: const EdgeInsets.all(10),
                     border: InputBorder.none,
                   ),
                 ),
               )),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
               Container(
                 height: 50,
                 width: 50,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     color: Colors.green,
                     boxShadow: [
                       BoxShadow(
@@ -205,18 +153,18 @@ class SearchSection extends StatelessWidget {
                         offset: Offset(0, 4),
                       )
                     ],
-                    borderRadius: BorderRadius.all(
+                    borderRadius: const BorderRadius.all(
                       Radius.circular(25),
                     )),
                 child: ElevatedButton(
                   onPressed: () {},
-                  child: Icon(
+                  child: const Icon(
                     Icons.search,
                     size: 26,
                   ),
                   style: ElevatedButton.styleFrom(
-                    shape: CircleBorder(),
-                    padding: EdgeInsets.all(10),
+                    shape: const CircleBorder(),
+                    padding: const EdgeInsets.all(10),
                     primary: c_green,
                   ),
                 ),
