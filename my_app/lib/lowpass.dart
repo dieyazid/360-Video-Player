@@ -1,5 +1,4 @@
 import 'package:vector_math/vector_math_64.dart';
-import 'package:motion_sensors/motion_sensors.dart';
 
 final value =  Vector3.all(0.0154);
 
