@@ -9,8 +9,8 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
         body: SingleChildScrollView(
           child: Column(
+            mainAxisSize:MainAxisSize.min,
             children: [
-              SizedBox(height: 20,),
               SearchSection(),
               VideoSection(),
             ],
@@ -27,9 +27,7 @@ class SearchSection extends StatelessWidget {
       height: size.height/9,
       color: const Color(0xFFeaeaea),
       padding: const EdgeInsets.fromLTRB(10, 25, 10, 10),
-      child: Column(
-        children: [
-          Row(
+      child:Row(
             children: [
               Expanded(
                   child: Container(
@@ -85,8 +83,6 @@ class SearchSection extends StatelessWidget {
               )
             ],
           ),
-        ],
-      ),
     );
   }
 }
@@ -109,7 +105,7 @@ class VideoSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         color: Colors.white,
         child: Column(
           children: Videos.map((video) {
@@ -125,18 +121,18 @@ class VideoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
       height: 210,
       width: double.infinity,
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.all(Radius.circular(18)),
+        borderRadius: const BorderRadius.all(Radius.circular(18)),
         boxShadow: [
           BoxShadow(
           color: Colors.grey.shade200,
           spreadRadius: 4,
           blurRadius: 6,
-          offset: Offset(0,3),
+          offset: const Offset(0,3),
         )
         ]),
         child: Column(
@@ -158,9 +154,9 @@ class VideoCard extends StatelessWidget {
                 right: -15,
                 child: MaterialButton(
                 color: Colors.white,
-                shape: CircleBorder(),
+                shape: const CircleBorder(),
                 onPressed: (){},
-                child: Icon(
+                child: const Icon(
                   Icons.play_arrow,
                   color: color_blue,
                   size: 20,
@@ -168,7 +164,7 @@ class VideoCard extends StatelessWidget {
             ],),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
+            margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
