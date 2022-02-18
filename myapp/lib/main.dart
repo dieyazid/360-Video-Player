@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         primaryColor: color_blue,
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: WelcomePage(),
+      home: const WelcomePage(),
     );
   }
 }
