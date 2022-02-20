@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/main.dart';
 import 'package:myapp/screens/login.dart';
+import 'package:myapp/screens/signup.dart';
 class WelcomePage extends StatelessWidget {
   const WelcomePage({Key? key}) : super(key: key);
 
@@ -110,7 +111,14 @@ class WelcomePage extends StatelessWidget {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(29),
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) {
+                    return const SignUpPage();
+                  }),
+                );
+              },
               style: ElevatedButton.styleFrom(
                 // shape: const CircleBorder(),
                 padding:
