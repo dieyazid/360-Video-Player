@@ -46,6 +46,8 @@ class SearchSection extends StatelessWidget {
                       )
                     ]),
                 child: const TextField(
+                  showCursor: false,
+                  textAlign: TextAlign.center,
                   decoration: InputDecoration(
                     hintText: 'Video title',
                     contentPadding: EdgeInsets.all(10),
