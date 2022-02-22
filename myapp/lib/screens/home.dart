@@ -198,8 +198,7 @@ class VideoCard extends StatelessWidget {
           ),
         ]) ,
       
-      //child: Image.asset(videoData['picture']
-      //)
+      
     );
   }
 }
