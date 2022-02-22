@@ -7,26 +7,28 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        body: SingleChildScrollView(
-          child: Column(
-            mainAxisSize:MainAxisSize.min,
-            children: [
-              SearchSection(),
-              VideoSection(),
-            ],
-          ),
+        resizeToAvoidBottomInset: false, 
+        body: Column(
+          mainAxisSize:MainAxisSize.min,
+          children: [
+            const SizedBox(height:15),
+            const SearchSection(),
+            VideoSection(),
+          ],
         ),
       );
 }
 
 class SearchSection extends StatelessWidget {
+  const SearchSection({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
-      height: size.height/9,
-      color: const Color(0xFFeaeaea),
-      padding: const EdgeInsets.fromLTRB(10, 25, 10, 10),
+      height: size.height/12,
+      color:Colors.transparent,
+      padding: const EdgeInsets.all(10),
       child:Row(
             children: [
               Expanded(
@@ -35,17 +37,18 @@ class SearchSection extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(30),
+                    // ignore: prefer_const_literals_to_create_immutables
                     boxShadow: [
                       const BoxShadow(
-                        color: Colors.grey,
+                        color: color_blue,
                         blurRadius: 5,
-                        offset: const Offset(0, 1),
+                        offset:  Offset(0, 1),
                       )
                     ]),
                 child: const TextField(
                   decoration: InputDecoration(
                     hintText: 'Video title',
-                    contentPadding: const EdgeInsets.all(10),
+                    contentPadding: EdgeInsets.all(10),
                     border: InputBorder.none,
                   ),
                 ),
@@ -65,7 +68,7 @@ class SearchSection extends StatelessWidget {
                         offset: Offset(0, 4),
                       )
                     ],
-                    borderRadius: const BorderRadius.all(
+                    borderRadius: BorderRadius.all(
                       Radius.circular(25),
                     )),
                 child: ElevatedButton(
@@ -87,42 +90,53 @@ class SearchSection extends StatelessWidget {
   }
 }
 class VideoSection extends StatelessWidget {
+  // ignore: non_constant_identifier_names
   final List Videos = [
-    {'title': '360 Video',
-    'picture':'images/planet.png',
-    'duration':'0:20'},
-    {'title': '360 Video',
-    'picture':'images/delete.png',
-    'duration':'0:35'},
-    {'title': '360 Video',
-    'picture':'images/star.png',
-    'duration':'0:35'},
-    {'title': '360 Video',
-    'picture':'images/login.png',
-    'duration':'0:35'},
+    {'title': 'Title',
+    'picture':'images/panoramic.png',
+    'duration':'xx:xx'},
+    {'title': 'Title',
+    'picture':'images/panoramic.png',
+    'duration':'xx:xx'},{'title': 'Title',
+    'picture':'images/panoramic.png',
+    'duration':'xx:xx'},{'title': 'Title',
+    'picture':'images/panoramic.png',
+    'duration':'xx:xx'},{'title': 'Title',
+    'picture':'images/panoramic.png',
+    'duration':'xx:xx'},
     
   ];
+
+ VideoSection({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Container(
+      height: size.height-(size.height/12+15),
         padding: const EdgeInsets.all(10),
-        color: Colors.white,
-        child: Column(
-          children: Videos.map((video) {
-            return VideoCard(video);
-          }).toList(),
-        ));
+        color: const Color(0xFFeaaea),
+        child: SingleChildScrollView(
+          child: Column(
+            children: Videos.map((video) {
+              return VideoCard(video);
+            }).toList(),
+            
+          ),
+        )
+        
+        );
   }
 }
 
 class VideoCard extends StatelessWidget {
   final Map videoData;
-  VideoCard(this.videoData);
+  // ignore: use_key_in_widget_constructors
+  const VideoCard(this.videoData);
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.all(10),
-      height: 210,
+      height: 200,
       width: double.infinity,
       decoration: BoxDecoration(
         color: Colors.white,
@@ -180,8 +194,7 @@ class VideoCard extends StatelessWidget {
                 ),),
               ],
             ),
-          )
-
+          ),
         ]) ,
       
       //child: Image.asset(videoData['picture']

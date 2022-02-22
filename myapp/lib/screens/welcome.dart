@@ -52,27 +52,25 @@ class WelcomePage extends StatelessWidget {
 
         Positioned(
           top: 180,
-          left: size.width / 25,
+          left: size.width /6,
           child: Column(
             children: <Widget>[
               Text(
-                "Welcome to",
+                "Welcome",
                 style: GoogleFonts.nunito(
                     color: Colors.black,
                     fontSize: 60,
                     fontWeight: FontWeight.w900),
               ),
-              Text(
-                "360VP",
-                style: GoogleFonts.nunito(
-                    color: color_blue,
-                    fontSize: 48,
-                    fontWeight: FontWeight.w800),
-              ),
+              
             ],
           ),
         ),
-
+        // Positioned(
+        // top: 230,
+        // left: size.width / 6,
+        // child: Image.asset("images/Space.png",height: size.height*0.3,),
+        // ),
         ////////Buttons///////////////
 
         Positioned(

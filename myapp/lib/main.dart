@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/screens/splash.dart';
 import 'package:myapp/screens/welcome.dart';
 
 const color_blue = Color(0xFF44468F);
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
         primaryColor: color_blue,
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: const WelcomePage(),
+      home: SplashScreen(),
     );
   }
 }
