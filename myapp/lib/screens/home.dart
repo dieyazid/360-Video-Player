@@ -42,15 +42,14 @@ class SearchSection extends StatelessWidget {
                       const BoxShadow(
                         color: color_blue,
                         blurRadius: 5,
-                        offset:  Offset(0, 1),
+                        offset:  Offset(0, 2),
                       )
                     ]),
                 child: const TextField(
                   showCursor: false,
-                  textAlign: TextAlign.center,
                   decoration: InputDecoration(
                     hintText: 'Video title',
-                    contentPadding: EdgeInsets.all(10),
+                    contentPadding: EdgeInsets.all(14),
                     border: InputBorder.none,
                   ),
                 ),
