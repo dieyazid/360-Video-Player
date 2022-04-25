@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:myapp/screens/splash.dart';
 import 'package:myapp/screens/welcome.dart';
 
-const color_blue = Color(0xFF44468F);
-const color_lightblue = Color(0xFFd8d9fe);
+const color_blue = Color(0xFFd59682);
+const color_lightblue = Color(0xFFfff1ed);
 void main() {
   runApp(const MyApp());
 }

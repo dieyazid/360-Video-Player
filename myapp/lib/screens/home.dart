@@ -64,74 +64,83 @@ class SearchSection extends StatelessWidget {
                     );
               },
               child: const Icon(
-                Icons.home,
+                Icons.logout,
                 size: 26,
               ),
               style: ElevatedButton.styleFrom(
                 shape: const CircleBorder(),
                 padding: const EdgeInsets.all(10),
-                primary: color_blue,
+                primary: Colors.redAccent,
               ),
             ),
           ),
           const SizedBox(width: 10,),
-          Expanded(
-              child: Container(
-            padding: const EdgeInsets.only(left: 5),
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(30),
-                // ignore: prefer_const_literals_to_create_immutables
-                boxShadow: [
-                  const BoxShadow(
-                    color: color_blue,
-                    blurRadius: 5,
-                    offset: Offset(0, 2),
-                  )
-                ]),
-            child: TextField(
-              style:GoogleFonts.nunito(
-                      color: Colors.black,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600),
-              showCursor: false,
-              decoration: InputDecoration(
-                hintText: 'Video title',
-                contentPadding: EdgeInsets.all(14),
-                border: InputBorder.none,
-              ),
-            ),
-          )),
-          const SizedBox(
-            width: 10,
-          ),
-          Container(
-            height: 50,
-            width: 50,
-            decoration: const BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey,
-                    blurRadius: 4,
-                    offset: Offset(0, 4),
-                  )
-                ],
-                borderRadius: BorderRadius.all(
-                  Radius.circular(25),
-                )),
-            child: ElevatedButton(
-              onPressed: () {},
-              child: const Icon(
-                Icons.search,
-                size: 26,
-              ),
-              style: ElevatedButton.styleFrom(
-                shape: const CircleBorder(),
-                padding: const EdgeInsets.all(10),
-                primary: color_blue,
-              ),
-            ),
-          )
+          Center(
+        child: Text(
+          "Logout!",
+          style: GoogleFonts.nunito(
+              color: Colors.black,
+              fontSize: 30,
+              fontWeight: FontWeight.w900),
+        ),
+      ),
+          // Expanded(
+          //     child: Container(
+          //   padding: const EdgeInsets.only(left: 5),
+          //   decoration: BoxDecoration(
+          //       color: Colors.white,
+          //       borderRadius: BorderRadius.circular(30),
+          //       // ignore: prefer_const_literals_to_create_immutables
+          //       boxShadow: [
+          //         const BoxShadow(
+          //           color: color_blue,
+          //           blurRadius: 5,
+          //           offset: Offset(0, 2),
+          //         )
+          //       ]),
+          //   child: TextField(
+          //     style:GoogleFonts.nunito(
+          //             color: Colors.black,
+          //             fontSize: 15,
+          //             fontWeight: FontWeight.w600),
+          //     showCursor: false,
+          //     decoration: const InputDecoration(
+          //       hintText: 'Video title',
+          //       contentPadding: EdgeInsets.all(14),
+          //       border: InputBorder.none,
+          //     ),
+          //   ),
+          // )),
+          // const SizedBox(
+          //   width: 10,
+          // ),
+          // Container(
+          //   height: 50,
+          //   width: 50,
+          //   decoration: const BoxDecoration(
+          //       boxShadow: [
+          //         BoxShadow(
+          //           color: Colors.grey,
+          //           blurRadius: 4,
+          //           offset: Offset(0, 4),
+          //         )
+          //       ],
+          //       borderRadius: BorderRadius.all(
+          //         Radius.circular(25),
+          //       )),
+          //   child: ElevatedButton(
+          //     onPressed: () {},
+          //     child: const Icon(
+          //       Icons.search,
+          //       size: 26,
+          //     ),
+          //     style: ElevatedButton.styleFrom(
+          //       shape: const CircleBorder(),
+          //       padding: const EdgeInsets.all(10),
+          //       primary: color_blue,
+          //     ),
+          //   ),
+          // )
         ],
       ),
     );
@@ -141,11 +150,9 @@ class SearchSection extends StatelessWidget {
 class VideoSection extends StatelessWidget {
   // ignore: non_constant_identifier_names
   final List Videos = [
-    {'title': 'Title', 'picture': 'images/panoramic.png', 'duration': 'xx:xx'},
-    {'title': 'Title', 'picture': 'images/panoramic.png', 'duration': 'xx:xx'},
-    {'title': 'Title', 'picture': 'images/panoramic.png', 'duration': 'xx:xx'},
-    {'title': 'Title', 'picture': 'images/panoramic.png', 'duration': 'xx:xx'},
-    {'title': 'Title', 'picture': 'images/panoramic.png', 'duration': 'xx:xx'},
+    {'title': 'Title', 'picture': 'assets/default.png', 'duration': 'xx:xx'},
+    {'title': 'Title', 'picture': 'assets/default.png', 'duration': 'xx:xx'},
+    {'title': 'Title', 'picture': 'assets/default.png', 'duration': 'xx:xx'},
   ];
 
   VideoSection({Key? key}) : super(key: key);

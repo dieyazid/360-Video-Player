@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/main.dart';
+import 'package:myapp/screens/forgotpass.dart';
 import 'package:myapp/screens/home.dart';
+import 'package:myapp/screens/welcome.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -28,24 +30,47 @@ class LoginPage_ extends State<LoginPage> {
       body: Stack(
           // alignment: Alignment.center,
           children: [
-            Stack(children: [
-              Positioned(
-                top: (size.height - size.height * 1.1),
-                left: (size.width - size.width * 1.1),
-                child: Image.asset(
-                  "images/splash1.png",
-                  width: size.width * 0.3,
+            Row(
+              children: [
+                Container(
+                  height: 50,
+                  width: 50,
+                  decoration: const BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey,
+                          blurRadius: 4,
+                          offset: Offset(0, 4),
+                        )
+                      ],
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(25),
+                      )),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) {
+                          return const WelcomePage();
+                        }),
+                      );
+                    },
+                    child: const Icon(
+                      Icons.arrow_back,
+                      size: 26,
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      shape: const CircleBorder(),
+                      padding: const EdgeInsets.all(10),
+                      primary: color_blue,
+                    ),
+                  ),
                 ),
-              ),
-              Positioned(
-                top: (size.height - size.height * 0.2),
-                left: (size.width - size.width * 0.2),
-                child: Image.asset(
-                  "images/splash1.png",
-                  width: size.width * 0.3,
+                const SizedBox(
+                  width: 10,
                 ),
-              ),
-            ]),
+              ],
+            ),
             Column(
               children: [
                 SizedBox(
@@ -53,7 +78,7 @@ class LoginPage_ extends State<LoginPage> {
                 ),
                 Center(
                     child: Image.asset(
-                  "images/login.png",
+                  "assets/login.png",
                   height: size.height * 0.3,
                 )),
                 Center(
@@ -174,6 +199,35 @@ class LoginPage_ extends State<LoginPage> {
                             fontSize: 20,
                             fontWeight: FontWeight.w800),
                       ),
+                    ),
+                  ),
+                ),
+                Center(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(29),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) {
+                            return ForgotPassword();
+                          }),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                          // shape: const CircleBorder(),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 20, horizontal: 80),
+                          primary: Colors.white),
+                      child: const Text.rich(TextSpan(
+                        text: "Forgot Password?",
+                        style: TextStyle(
+                            decoration: TextDecoration.underline,
+                            fontFamily: "GoogleFonts.nunito",
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black),
+                      )),
                     ),
                   ),
                 ),
