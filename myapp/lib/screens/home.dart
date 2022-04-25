@@ -6,23 +6,25 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/main.dart';
 import 'package:http/http.dart' as http;
+import 'package:myapp/screens/welcome.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => Scaffold(
-      //resizeToAvoidBottomInset: false,
-      body: DataFromApi()
-      // Column(
-      //   mainAxisSize: MainAxisSize.min,
-      //   children: [
-      //     const SizedBox(height: 15),
-      //     const SearchSection(),
-      //     VideoSection(),
+      resizeToAvoidBottomInset: false,
+      body: 
+      // DataFromApi()
+      Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const SizedBox(height: 15),
+          const SearchSection(),
+          VideoSection(),
 
-      //   ],
-      // ),
+        ],
+      ),
       );
 }
 
@@ -38,6 +40,41 @@ class SearchSection extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       child: Row(
         children: [
+          Container(
+            height: 50,
+            width: 50,
+            decoration: const BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey,
+                    blurRadius: 4,
+                    offset: Offset(0, 4),
+                  )
+                ],
+                borderRadius: BorderRadius.all(
+                  Radius.circular(25),
+                )),
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) {
+                        return const WelcomePage();
+                      }),
+                    );
+              },
+              child: const Icon(
+                Icons.home,
+                size: 26,
+              ),
+              style: ElevatedButton.styleFrom(
+                shape: const CircleBorder(),
+                padding: const EdgeInsets.all(10),
+                primary: color_blue,
+              ),
+            ),
+          ),
+          const SizedBox(width: 10,),
           Expanded(
               child: Container(
             padding: const EdgeInsets.only(left: 5),
@@ -52,7 +89,11 @@ class SearchSection extends StatelessWidget {
                     offset: Offset(0, 2),
                   )
                 ]),
-            child: const TextField(
+            child: TextField(
+              style:GoogleFonts.nunito(
+                      color: Colors.black,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600),
               showCursor: false,
               decoration: InputDecoration(
                 hintText: 'Video title',

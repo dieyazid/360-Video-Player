@@ -41,46 +41,20 @@ class _MyHomePageState extends State<MyHomePage> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Stack(
-      alignment: Alignment.center,
+      // alignment: Alignment.center,
       children: <Widget>[
-
-      Positioned(
-        bottom: -90,
-        right: -130,
-        child: Image.asset(
-          "images/splash.png",
-          width: size.width ,
-        ),
-      ),
-      Positioned(
-        top: -90,
-        left: -130,
-        child: Image.asset(
-          "images/splash1.png",
-          width: size.width ,
-        ),
-      ),
-      Positioned(
-        top: size.height/1.9,
-        left: size.width/5,
-        child: Image.asset("images/Space.png",height: size.height*0.7,),
-        ),
-      Positioned(
-        top: 180,
-        left: size.width / 6,
-        child: Column(
-          children: <Widget>[
+      Center(
+        child: Image.asset("images/splash1.png",height: size.height*0.7,),),
+      Center(
+        child:
             Text(
-              "360°",
+              "Panorama",
               style: GoogleFonts.nunito(
                   color: Colors.white,
-                  fontSize: 60,
+                  fontSize: 50,
                   fontWeight: FontWeight.w900),
             ),
-          ],
-        ),
       ),
-
       ]
     ));
   }
