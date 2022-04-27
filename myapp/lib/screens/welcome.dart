@@ -21,12 +21,12 @@ class WelcomePage extends StatelessWidget {
               fontSize: 60,
               fontWeight: FontWeight.w900),
         ),),
-        const SizedBox(height: 30),
+        const SizedBox(height: 40),
         Center(
           child: Text(
           "Take your first step!",
           style: GoogleFonts.nunito(
-              color:color_blue ,
+              color:Colors.black ,
               fontSize: 30,
               fontWeight: FontWeight.w900),
         ),),
@@ -62,7 +62,7 @@ class WelcomePage extends StatelessWidget {
         const SizedBox(height: 30),
         Center(
           child: Text(
-          "Already a member login?",
+          "Already a member",
           style: GoogleFonts.nunito(
               color:Colors.black ,
               fontSize: 30,

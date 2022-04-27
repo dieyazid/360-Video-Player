@@ -1,34 +1,64 @@
-import 'package:email_validator/email_validator.dart';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/main.dart';
-import 'package:myapp/screens/forgotpass.dart';
 import 'package:myapp/screens/home.dart';
 import 'package:myapp/screens/welcome.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class ActivationPage extends StatefulWidget {
+  const ActivationPage({Key? key}) : super(key: key);
   @override
-  LoginPage_ createState() => LoginPage_();
+  ActivationPage_ createState() => ActivationPage_();
 }
 
 // ignore: camel_case_types
-class LoginPage_ extends State<LoginPage> {
+class ActivationPage_ extends State<ActivationPage> {
   final formKey = GlobalKey<FormState>();
-  final textfieldfocus = FocusNode();
-  bool obscure_ = true;
-  void toggleObscured() {
-    setState(() {
-      obscure_ = !obscure_;
-      if (textfieldfocus.hasPrimaryFocus) return;
-      textfieldfocus.canRequestFocus = false;
-    });
-  }
 
+  // ignore: non_constant_identifier_names
+  bool ButtonActive = false;
+  bool pressAttention = false;
+  bool countDownComplete = false;
+  late Timer _timer;
+int _start = 5;
+
+void startTimer() {
+  const oneSec = Duration(seconds: 1);
+  _timer = Timer.periodic(
+    oneSec,
+    (Timer timer) {
+      if (_start == 0) {
+        setState(() {
+          timer.cancel();
+        });
+        setState(() => pressAttention = !pressAttention);
+                          setState(() =>
+                            ButtonActive =!ButtonActive); 
+      } else {
+        setState(() {
+          _start--;
+        });
+      }
+    },
+  );
+}
+
+@override
+void dispose() {
+  _timer.cancel();
+  super.dispose();
+}
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance
+        ?.addPostFrameCallback((_) => startTimer());
+  }
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      
       resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
         child: Stack(
@@ -82,15 +112,33 @@ class LoginPage_ extends State<LoginPage> {
                   ),
                   Center(
                       child: Image.asset(
-                    "assets/login.png",
+                    "assets/mailsent.png",
                     height: size.height * 0.3,
                   )),
                   Center(
                     child: Text(
-                      "Login",
+                      "Activation",
                       style: GoogleFonts.nunito(
                           color: Colors.black,
                           fontSize: 60,
+                          fontWeight: FontWeight.w900),
+                    ),
+                  ),
+                  Center(
+                    child: Text(
+                      "$_start",
+                      style: GoogleFonts.nunito(
+                          color: Colors.black,
+                          fontSize: 60,
+                          fontWeight: FontWeight.w900),
+                    ),
+                  ),
+                  Center(
+                    child: Text(
+                      "We\'ve sent you an email containing your activation code\n Please check your inbox and copy the code below",
+                      style: GoogleFonts.nunito(
+                          color: Colors.black,
+                          fontSize: 15,
                           fontWeight: FontWeight.w900),
                     ),
                   ),
@@ -103,11 +151,11 @@ class LoginPage_ extends State<LoginPage> {
                     child: Column(children: [
                       Center(
                           child: SizedBox(
-                        width: size.width * 0.7,
+                        width: size.width * 0.3,
                         child: TextFormField(
-                          validator: (email) =>
-                              email != null && !EmailValidator.validate(email)
-                                  ? 'Invalid Email'
+                          validator: (code) =>
+                              code != null && code.length<4 
+                                  ? 'Invalid code'
                                   : null,
                           style: GoogleFonts.nunito(
                               color: Colors.black,
@@ -116,7 +164,7 @@ class LoginPage_ extends State<LoginPage> {
                           decoration: InputDecoration(
                             floatingLabelBehavior: FloatingLabelBehavior
                                 .never, //Hides label on focus or if filled
-                            labelText: "Email",
+                            labelText: "Code",
                             filled: true, // Needed for adding a fill color
                             fillColor: color_lightblue,
                             isDense: true, // Reduces height a bit
@@ -126,7 +174,7 @@ class LoginPage_ extends State<LoginPage> {
                                   20), // Apply corner radius
                             ),
                             prefixIcon: const Icon(
-                              Icons.mail,
+                              Icons.code,
                               size: 24,
                               color: color_blue,
                             ),
@@ -139,57 +187,6 @@ class LoginPage_ extends State<LoginPage> {
                       SizedBox(
                         height: size.height * 0.03,
                       ),
-                      Center(
-                          child: SizedBox(
-                        width: size.width * 0.7,
-                        child: TextFormField(
-                          validator: (password) {
-                            if (password!.length < 8) {
-                              return 'Invalid Password';
-                            } else {
-                              return null;
-                            }
-                          },
-                          style: GoogleFonts.nunito(
-                              color: Colors.black,
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600),
-                          keyboardType: TextInputType.visiblePassword,
-                          obscureText: obscure_,
-                          // focusNode: textfieldfocus,
-                          decoration: InputDecoration(
-                            floatingLabelBehavior: FloatingLabelBehavior
-                                .never, //Hides label on focus or if filled
-                            labelText: "Password",
-                            filled: true, // Needed for adding a fill color
-                            fillColor: color_lightblue,
-                            isDense: true, // Reduces height a bit
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide.none, // No border
-                              borderRadius: BorderRadius.circular(
-                                  20), // Apply corner radius
-                            ),
-                            prefixIcon: const Icon(
-                              Icons.lock_rounded,
-                              size: 24,
-                              color: color_blue,
-                            ),
-                            suffixIcon: Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 0, 4, 0),
-                              child: GestureDetector(
-                                onTap: toggleObscured,
-                                child: Icon(
-                                  obscure_
-                                      ? Icons.visibility_rounded
-                                      : Icons.visibility_off_rounded,
-                                  color: color_blue,
-                                  size: 24,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      )),
                     ]),
                   ),
                   SizedBox(
@@ -216,7 +213,7 @@ class LoginPage_ extends State<LoginPage> {
                           primary: color_blue,
                         ),
                         child: Text(
-                          "LOGIN",
+                          "SUBMIT",
                           style: GoogleFonts.nunito(
                               color: Colors.white,
                               fontSize: 20,
@@ -229,27 +226,31 @@ class LoginPage_ extends State<LoginPage> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(29),
                       child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) {
-                              return ForgotPassword();
-                            }),
-                          );
-                        },
+                        onPressed: ButtonActive
+                        ?() {
+                          setState(() => _start =5 );
+                          startTimer();
+                          
+                          setState(() => pressAttention = !pressAttention);
+                          setState(() =>
+                            ButtonActive =false); 
+                        }
+                        :null,
                         style: ElevatedButton.styleFrom(
+                          onSurface: Colors.white,
                             // shape: const CircleBorder(),
                             padding: const EdgeInsets.symmetric(
                                 vertical: 20, horizontal: 80),
                             primary: Colors.white),
-                        child: const Text.rich(TextSpan(
-                          text: "Forgot Password?",
+                        child:  Text.rich(
+                          TextSpan(
+                          text: "Resend Code",
                           style: TextStyle(
                               decoration: TextDecoration.underline,
                               fontFamily: "GoogleFonts.nunito",
                               fontSize: 20,
                               fontWeight: FontWeight.w500,
-                              color: Colors.black),
+                              color: pressAttention ? Colors.black : Colors.grey,),
                         )),
                       ),
                     ),
