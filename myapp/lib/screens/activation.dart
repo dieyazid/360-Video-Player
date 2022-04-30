@@ -6,7 +6,8 @@ import 'package:myapp/screens/home.dart';
 import 'package:myapp/screens/welcome.dart';
 
 class ActivationPage extends StatefulWidget {
-  const ActivationPage({Key? key}) : super(key: key);
+  final String usermail;
+  const ActivationPage({Key? key, required this.usermail}) : super(key: key);
   @override
   ActivationPage_ createState() => ActivationPage_();
 }
@@ -14,51 +15,49 @@ class ActivationPage extends StatefulWidget {
 // ignore: camel_case_types
 class ActivationPage_ extends State<ActivationPage> {
   final formKey = GlobalKey<FormState>();
-
   // ignore: non_constant_identifier_names
   bool ButtonActive = false;
   bool pressAttention = false;
   bool countDownComplete = false;
   late Timer _timer;
-int _start = 5;
+  int _start = 60;
 
-void startTimer() {
-  const oneSec = Duration(seconds: 1);
-  _timer = Timer.periodic(
-    oneSec,
-    (Timer timer) {
-      if (_start == 0) {
-        setState(() {
-          timer.cancel();
-        });
-        setState(() => pressAttention = !pressAttention);
-                          setState(() =>
-                            ButtonActive =!ButtonActive); 
-      } else {
-        setState(() {
-          _start--;
-        });
-      }
-    },
-  );
-}
+  void startTimer() {
+    const oneSec = Duration(seconds: 1);
+    _timer = Timer.periodic(
+      oneSec,
+      (Timer timer) {
+        if (_start == 0) {
+          setState(() {
+            timer.cancel();
+          });
+          setState(() => pressAttention = !pressAttention);
+          setState(() => ButtonActive = !ButtonActive);
+        } else {
+          setState(() {
+            _start--;
+          });
+        }
+      },
+    );
+  }
 
-@override
-void dispose() {
-  _timer.cancel();
-  super.dispose();
-}
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
+
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance
-        ?.addPostFrameCallback((_) => startTimer());
+    WidgetsBinding.instance?.addPostFrameCallback((_) => startTimer());
   }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      
       resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
         child: Stack(
@@ -96,7 +95,7 @@ void dispose() {
                       style: ElevatedButton.styleFrom(
                         shape: const CircleBorder(),
                         padding: const EdgeInsets.all(10),
-                        primary: color_blue,
+                        primary: base_color,
                       ),
                     ),
                   ),
@@ -135,7 +134,8 @@ void dispose() {
                   ),
                   Center(
                     child: Text(
-                      "We\'ve sent you an email containing your activation code\n Please check your inbox and copy the code below",
+                      "We've sent an email with a confirmation code to ${widget.usermail}.\n In order to complete the sign-up process, please check your inbox and copy the activation code below.",
+                      textAlign: TextAlign.center,
                       style: GoogleFonts.nunito(
                           color: Colors.black,
                           fontSize: 15,
@@ -153,10 +153,9 @@ void dispose() {
                           child: SizedBox(
                         width: size.width * 0.3,
                         child: TextFormField(
-                          validator: (code) =>
-                              code != null && code.length<4 
-                                  ? 'Invalid code'
-                                  : null,
+                          validator: (code) => code != null && code.length < 4 
+                              ? 'Invalid code'
+                              : null,
                           style: GoogleFonts.nunito(
                               color: Colors.black,
                               fontSize: 15,
@@ -166,7 +165,7 @@ void dispose() {
                                 .never, //Hides label on focus or if filled
                             labelText: "Code",
                             filled: true, // Needed for adding a fill color
-                            fillColor: color_lightblue,
+                            fillColor: second_color,
                             isDense: true, // Reduces height a bit
                             border: OutlineInputBorder(
                               borderSide: BorderSide.none, // No border
@@ -176,7 +175,7 @@ void dispose() {
                             prefixIcon: const Icon(
                               Icons.code,
                               size: 24,
-                              color: color_blue,
+                              color: base_color,
                             ),
                             suffixIcon: const Padding(
                               padding: EdgeInsets.fromLTRB(0, 0, 4, 0),
@@ -210,7 +209,7 @@ void dispose() {
                           // shape: const CircleBorder(),
                           padding: const EdgeInsets.symmetric(
                               vertical: 20, horizontal: 80),
-                          primary: color_blue,
+                          primary: base_color,
                         ),
                         child: Text(
                           "SUBMIT",
@@ -227,30 +226,30 @@ void dispose() {
                       borderRadius: BorderRadius.circular(29),
                       child: ElevatedButton(
                         onPressed: ButtonActive
-                        ?() {
-                          setState(() => _start =5 );
-                          startTimer();
-                          
-                          setState(() => pressAttention = !pressAttention);
-                          setState(() =>
-                            ButtonActive =false); 
-                        }
-                        :null,
+                            ? () {
+                                setState(() => _start = 60);
+                                startTimer();
+
+                                setState(
+                                    () => pressAttention = !pressAttention);
+                                setState(() => ButtonActive = false);
+                              }
+                            : null,
                         style: ElevatedButton.styleFrom(
-                          onSurface: Colors.white,
+                            onSurface: Colors.white,
                             // shape: const CircleBorder(),
                             padding: const EdgeInsets.symmetric(
                                 vertical: 20, horizontal: 80),
                             primary: Colors.white),
-                        child:  Text.rich(
-                          TextSpan(
+                        child: Text.rich(TextSpan(
                           text: "Resend Code",
                           style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              fontFamily: "GoogleFonts.nunito",
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
-                              color: pressAttention ? Colors.black : Colors.grey,),
+                            decoration: TextDecoration.underline,
+                            fontFamily: "GoogleFonts.nunito",
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                            color: pressAttention ? Colors.black : Colors.grey,
+                          ),
                         )),
                       ),
                     ),

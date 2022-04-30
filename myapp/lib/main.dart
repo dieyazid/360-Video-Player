@@ -1,24 +1,30 @@
-import 'package:flutter/material.dart';
-import 'package:myapp/screens/splash.dart';
-import 'package:myapp/screens/welcome.dart';
+// ignore_for_file: constant_identifier_names
 
-const color_blue = Color(0xFFd59682);
-const color_lightblue = Color(0xFFfff1ed);
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:myapp/screens/splash.dart';
+
+const base_color = Color(0xFFd59682);
+const second_color = Color(0xFFfff1ed);
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  
   const MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of our application.
   @override
   Widget build(BuildContext context) {
+    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
+    // SystemChrome.setEnabledSystemUIOverlays([]);
+    
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Login',
       theme: ThemeData(
-        primaryColor: color_blue,
+        primaryColor: base_color,
         scaffoldBackgroundColor: Colors.white,
       ),
       home: const SplashScreen(),

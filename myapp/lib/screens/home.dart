@@ -93,7 +93,7 @@ class SearchSection extends StatelessWidget {
           //       // ignore: prefer_const_literals_to_create_immutables
           //       boxShadow: [
           //         const BoxShadow(
-          //           color: color_blue,
+          //           color: base_color,
           //           blurRadius: 5,
           //           offset: Offset(0, 2),
           //         )
@@ -137,7 +137,7 @@ class SearchSection extends StatelessWidget {
           //     style: ElevatedButton.styleFrom(
           //       shape: const CircleBorder(),
           //       padding: const EdgeInsets.all(10),
-          //       primary: color_blue,
+          //       primary: base_color,
           //     ),
           //   ),
           // )
@@ -251,7 +251,7 @@ class VideoCard extends StatelessWidget {
                     onPressed: () {},
                     child: const Icon(
                       Icons.play_arrow,
-                      color: color_blue,
+                      color: base_color,
                       size: 20,
                     ),
                   ))

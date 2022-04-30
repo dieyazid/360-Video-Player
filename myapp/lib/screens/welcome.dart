@@ -38,7 +38,7 @@ class WelcomePage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) {
-                    return const SignUpPage();
+                    return  const SignUpPage();
                   }),
                 );
               },
@@ -47,7 +47,7 @@ class WelcomePage extends StatelessWidget {
                 
                 padding:
                     const EdgeInsets.symmetric(vertical: 20, horizontal: 70),
-                primary: color_blue,
+                primary: base_color,
               ),
               child: Text(
                 "SIGN UP",
@@ -84,7 +84,7 @@ class WelcomePage extends StatelessWidget {
                 // shape: const CircleBorder(),
                 padding:
                     const EdgeInsets.symmetric(vertical: 20, horizontal: 80),
-                primary: color_blue,
+                primary: base_color,
               ),
               child: Text(
                 "LOGIN",

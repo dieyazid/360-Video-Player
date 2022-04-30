@@ -45,7 +45,7 @@ class ForgotPassword extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       shape: const CircleBorder(),
                       padding: const EdgeInsets.all(10),
-                      primary: color_blue,
+                      primary: base_color,
                     ),
                   ),
                 ),
