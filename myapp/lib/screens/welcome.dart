@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/main.dart';
+import 'package:myapp/screens/home.dart';
 import 'package:myapp/screens/login.dart';
 import 'package:myapp/screens/signup.dart';
 class WelcomePage extends StatelessWidget {
@@ -76,7 +77,7 @@ class WelcomePage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) {
-                    return const LoginPage();
+                    return const HomePage();
                   }),
                 );
               },

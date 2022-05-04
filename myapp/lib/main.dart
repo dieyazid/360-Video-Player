@@ -17,9 +17,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of our application.
   @override
   Widget build(BuildContext context) {
-    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
-    // SystemChrome.setEnabledSystemUIOverlays([]);
-    
+    WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [
+    SystemUiOverlay.bottom, //This line is used for showing the bottom bar
+  ]);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Login',

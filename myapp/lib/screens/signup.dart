@@ -3,11 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/main.dart';
 import 'package:myapp/screens/activation.dart';
-import 'package:myapp/screens/home.dart';
 import 'package:myapp/screens/welcome.dart';
 
-class TopSection extends StatelessWidget {
-  const TopSection({Key? key}) : super(key: key);
+class TopSection_ extends StatelessWidget {
+  const TopSection_({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -63,13 +62,13 @@ class TopSection extends StatelessWidget {
 
 ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
-class FormSection extends StatefulWidget {
-  const FormSection({Key? key}) : super(key: key);
+class FormSection_ extends StatefulWidget {
+  const FormSection_({Key? key}) : super(key: key);
   @override
-  FormSection_ createState() => FormSection_();
+  FormSection__ createState() => FormSection__();
 }
 
-class FormSection_ extends State<FormSection> {
+class FormSection__ extends State<FormSection_> {
   final formKey = GlobalKey<FormState>();
   final textfieldfocus = FocusNode();
   TextEditingController usermail = TextEditingController();
@@ -464,8 +463,8 @@ class SignUpPage extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: const [
-              TopSection(),
-              FormSection(),
+              TopSection_(),
+              FormSection_(),
             ],
           ),
         ));
