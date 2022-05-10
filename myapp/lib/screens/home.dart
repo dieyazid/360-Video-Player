@@ -7,137 +7,162 @@ import 'package:myapp/main.dart';
 import 'package:http/http.dart' as http;
 import 'package:myapp/screens/welcome.dart';
 
-
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+  @override
+  HomePage_ createState() => HomePage_();
+}
+
+class HomePage_ extends State<HomePage> {
+  List Videos = [
+    // {'title': 'Title', 'picture': 'assets/default.png', 'duration': 'xx:xx'},
+    // {'title': 'Title', 'picture': 'assets/default.png', 'duration': 'xx:xx'},
+    // {'title': 'Title', 'picture': 'assets/default.png', 'duration': 'xx:xx'},
+    // {'title': 'Title', 'picture': 'assets/default.png', 'duration': 'xx:xx'},
+  ];
+  getData() async {
+    const String url = "http://192.168.1.12:3000/users";
+    var response = await http.get(Uri.parse(url));
+    var jsonData = jsonDecode(response.body);
+    final length = jsonData.length;
+    for (var u in jsonData) {
+      Videos.add({
+        'title': u['title'],
+        'thumbnail': u['thumbnail'],
+        'duration': u['duration']
+      });
+    }
+    return Videos;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration.zero, () async {
+      Videos = await getData();
+      setState(() {});
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: base_color
-      ),
-      body: VideoSection(),
+      resizeToAvoidBottomInset: true,
+      appBar: AppBar(backgroundColor: base_color),
       drawer: Drawer(
-        // Add a ListView to the drawer. This ensures the user can scroll
-        // through the options in the drawer if there isn't enough vertical
-        // space to fit everything.
         child: ListView(
-          // Important: Remove any padding from the ListView.
+          // Important Remove any padding from the ListView.
           padding: EdgeInsets.zero,
           children: [
             DrawerHeader(
-              decoration:const BoxDecoration(
+              decoration: const BoxDecoration(
                 color: second_color,
               ),
-              child: Column(children: [
-                const Text(
-                  'Hello!',
+              child: Column(children: const [
+                Text(
+                  'Menu',
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w700,
                     color: Colors.black,
                   ),
                 ),
-      
               ]),
             ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) {
-                    return const WelcomePage();
-                  }),
-                );
-              },
-              child: Row(children: const [
-                Text(
-                  'Logout',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white,
+            SizedBox(
+              height: 45,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) {
+                      return const HomePage();
+                    }),
+                  );
+                },
+                child: Row(children: const [
+                  Icon(
+                    Icons.settings,
+                    color: Colors.black,
                   ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    'Refresh List',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.black,
+                    ),
+                  ),
+                ]),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.white,
                 ),
-                Icon(
-                  Icons.logout,
-                ),
-              ]),
-              style: ElevatedButton.styleFrom(
-                primary: Colors.redAccent,
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            SizedBox(
+              height: 45,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) {
+                      return const WelcomePage();
+                    }),
+                  );
+                },
+                child: Row(children: const [
+                  Icon(
+                    Icons.logout,
+                    color: Colors.black,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    'Logout',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.black,
+                    ),
+                  ),
+                ]),
+                style: ElevatedButton.styleFrom(primary: Colors.white),
               ),
             ),
           ],
         ),
       ),
+      body: SingleChildScrollView(
+        child: Column(mainAxisSize: MainAxisSize.min, children: [
+          Container(
+              height: size.height - (size.height / 12 + 15),
+              padding: const EdgeInsets.all(10),
+              color: const Color(0x0ffeaaea),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: Videos.map((video) {
+                    return VideoCard(video);
+                  }).toList(),
+                ),
+              ))
+        ]),
+      ),
     );
-  }
-}
-
-class VideoSection extends StatelessWidget {
-  // ignore: non_constant_identifier_names
-  final List Videos = [
-    {'title': 'Title', 'picture': 'assets/default.png', 'duration': 'xx:xx'},
-    {'title': 'Title', 'picture': 'assets/default.png', 'duration': 'xx:xx'},
-    {'title': 'Title', 'picture': 'assets/default.png', 'duration': 'xx:xx'},
-  ];
-
-  VideoSection({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    return Container(
-        height: size.height - (size.height / 12 + 15),
-        padding: const EdgeInsets.all(10),
-        color: const Color(0xFFeaaea),
-        child: SingleChildScrollView(
-          child: Column(
-            children: Videos.map((video) {
-              return VideoCard(video);
-            }).toList(),
-          ),
-        ));
   }
 }
 
 class Video {
-  final String title, duration, thumbnail;
+  final String name, email, username;
 
-  Video(this.title, this.duration, this.thumbnail);
-}
-
-// ignore: use_key_in_widget_constructors
-class DataFromApi extends StatefulWidget {
-  @override
-  _DataFromApiState createState() => _DataFromApiState();
-}
-
-class _DataFromApiState extends State<DataFromApi> {
-  Future getData() async {
-    const String url = "http://192.168.1.12:3000/video";
-    var response = await http.get(Uri.parse(url));
-    var jsonData = jsonDecode(response.body);
-    final length = jsonData.length;
-    print(length);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('DATA'),
-      ),
-      body: Center(
-          child: ElevatedButton(
-        child: const Text('CLICK'),
-        onPressed: () {
-          getData();
-        },
-      )),
-    );
-  }
+  Video(this.name, this.email, this.username);
 }
 
 class VideoCard extends StatelessWidget {
@@ -147,7 +172,7 @@ class VideoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(10),
+      margin: const EdgeInsets.all(5),
       height: 200,
       width: double.infinity,
       decoration: BoxDecoration(
@@ -163,10 +188,10 @@ class VideoCard extends StatelessWidget {
           ]),
       child: Column(children: [
         Container(
-          height: 140,
+          height: 150,
           decoration: BoxDecoration(
               image: DecorationImage(
-            image: AssetImage(videoData['picture']),
+            image: NetworkImage(videoData['thumbnail']),
             fit: BoxFit.cover,
           )),
           child: Stack(
