@@ -1,64 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:myapp/main.dart';
 import 'package:myapp/screens/home.dart';
 import 'package:myapp/screens/welcome.dart';
-
-class TopSection extends StatelessWidget {
-  const TopSection({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    return Container(
-      height: size.height / 16,
-      color: Colors.transparent,
-      // padding: const EdgeInsets.all(10),
-      child: Row(
-        children: [
-          SizedBox(
-            height: size.height * 0.001,
-          ),
-          Container(
-            height: 50,
-            width: 80,
-            decoration: const BoxDecoration(
-                // boxShadow: [
-                //   BoxShadow(
-                //     color: Colors.grey,
-                //     blurRadius: 4,
-                //     offset: Offset(0, 4),
-                //   )
-                // ],
-                borderRadius: BorderRadius.all(
-              Radius.circular(10),
-            )),
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) {
-                    return const WelcomePage();
-                  }),
-                );
-              },
-              child: const Icon(
-                Icons.arrow_back,
-                size: 26,
-              ),
-              style: ElevatedButton.styleFrom(
-                shape: const CircleBorder(),
-                padding: const EdgeInsets.all(10),
-                primary: base_color,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
 
 class ActivationPage extends StatefulWidget {
   final String usermail;
@@ -69,6 +13,7 @@ class ActivationPage extends StatefulWidget {
 
 // ignore: camel_case_types
 class ActivationPage_ extends State<ActivationPage> {
+  //** Variables **/
   final formKey = GlobalKey<FormState>();
   // ignore: non_constant_identifier_names
   bool ButtonActive = false;
@@ -76,7 +21,7 @@ class ActivationPage_ extends State<ActivationPage> {
   bool countDownComplete = false;
   late Timer _timer;
   int _start = 60;
-
+  //** This function starts the 60sec countdown **/
   void startTimer() {
     const oneSec = Duration(seconds: 1);
     _timer = Timer.periodic(
@@ -111,8 +56,6 @@ class ActivationPage_ extends State<ActivationPage> {
 
   @override
   Widget build(BuildContext context) {
-     
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: SingleChildScrollView(
@@ -126,18 +69,18 @@ class ActivationPage_ extends State<ActivationPage> {
                   Center(
                     child: Image.asset(
                       "assets/mailsent.png",
-                      height: size.height * 0.3,
+                      height: deviceHeight * 0.3,
                     ),
                   ),
                   Center(
-                  child: Text(
-                    "Activation",
-                    style: GoogleFonts.nunito(
-                        color: Colors.black,
-                        fontSize: 40,
-                        fontWeight: FontWeight.w900),
+                    child: Text(
+                      "Activation",
+                      style: GoogleFonts.nunito(
+                          color: Colors.black,
+                          fontSize: 40,
+                          fontWeight: FontWeight.w900),
+                    ),
                   ),
-                ),
                 ])),
                 Center(
                   child: Text(
@@ -150,7 +93,10 @@ class ActivationPage_ extends State<ActivationPage> {
                 ),
                 Center(
                   child: Text(
-                    "We've sent an email with a confirmation code to ${widget.usermail}.\n In order to complete the sign-up process, please check your inbox and copy the activation code below.",
+                    "We've sent an email with a confirmation code "
+                    "to ${widget.usermail}.\n In order to complete the sign-up"
+                    " process, please check your inbox and copy the activation"
+                    " code below.",
                     textAlign: TextAlign.center,
                     style: GoogleFonts.nunito(
                         color: Colors.black,
@@ -159,7 +105,7 @@ class ActivationPage_ extends State<ActivationPage> {
                   ),
                 ),
                 SizedBox(
-                  height: size.height * 0.03,
+                  height: deviceHeight * 0.03,
                 ),
                 Form(
                   key: formKey,
@@ -167,7 +113,7 @@ class ActivationPage_ extends State<ActivationPage> {
                   child: Column(children: [
                     Center(
                         child: SizedBox(
-                      width: size.width * 0.4,
+                      width: deviceWidth * 0.4,
                       child: TextFormField(
                         validator: (code) => code != null && code.length < 4
                             ? 'Invalid code'
@@ -200,12 +146,12 @@ class ActivationPage_ extends State<ActivationPage> {
                       ),
                     )),
                     SizedBox(
-                      height: size.height * 0.03,
+                      height: deviceHeight * 0.03,
                     ),
                   ]),
                 ),
                 SizedBox(
-                  height: size.height * 0.03,
+                  height: deviceHeight * 0.03,
                 ),
                 Center(
                   child: ClipRRect(
@@ -273,6 +219,61 @@ class ActivationPage_ extends State<ActivationPage> {
             ),
           ),
         ]),
+      ),
+    );
+  }
+}
+
+class TopSection extends StatelessWidget {
+  const TopSection({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    return Container(
+      height: deviceHeight / 16,
+      color: Colors.transparent,
+      // padding: const EdgeInsets.all(10),
+      child: Row(
+        children: [
+          SizedBox(
+            height: deviceHeight * 0.001,
+          ),
+          Container(
+            height: 50,
+            width: 80,
+            decoration: const BoxDecoration(
+                // boxShadow: [
+                //   BoxShadow(
+                //     color: Colors.grey,
+                //     blurRadius: 4,
+                //     offset: Offset(0, 4),
+                //   )
+                // ],
+                borderRadius: BorderRadius.all(
+              Radius.circular(10),
+            )),
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) {
+                    return const WelcomePage();
+                  }),
+                );
+              },
+              child: const Icon(
+                Icons.arrow_back,
+                size: 26,
+              ),
+              style: ElevatedButton.styleFrom(
+                shape: const CircleBorder(),
+                padding: const EdgeInsets.all(10),
+                primary: base_color,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

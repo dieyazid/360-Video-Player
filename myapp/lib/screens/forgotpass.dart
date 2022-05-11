@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:myapp/main.dart';
-import 'package:myapp/screens/home.dart';
 import 'package:myapp/screens/welcome.dart';
+import 'package:myapp/screens/welcome.dart';
+
 
 class ForgotPassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Column(
@@ -66,7 +65,7 @@ class ForgotPassword extends StatelessWidget {
             Center(
                 child: Image.asset(
               "assets/forgotpassword.png",
-              height: size.height * 0.3,
+              height: deviceHeight * 0.3,
             )),
           ]),
     );
