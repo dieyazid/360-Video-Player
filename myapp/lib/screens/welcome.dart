@@ -1,5 +1,4 @@
 // ignore_for_file: prefer_typing_uninitialized_variables, constant_identifier_names
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/screens/home.dart';
@@ -24,7 +23,7 @@ class WelcomePage extends StatelessWidget {
     return Scaffold(
         body: Column(children: <Widget>[
       Container(
-        height: size.height - (size.height / 1.5),
+        height: deviceHeight - (deviceHeight / 1.5),
         padding: const EdgeInsets.all(10),
         decoration: const BoxDecoration(color: base_color,
             // borderRadius: const BorderRadius.all(Radius.circular(18)),
@@ -36,24 +35,8 @@ class WelcomePage extends StatelessWidget {
                 offset: Offset(0, 3),
               )
             ]),
-        child: SingleChildScrollView(
-          child: Column(children: [
-            Center(
-              child: Text(
-                "Welcome!",
-                style: GoogleFonts.nunito(
-                    color: Colors.white,
-                    fontSize: 60,
-                    fontWeight: FontWeight.w900),
-              ),
-            ),
-            Center(
-              child: Image.asset(
-                "assets/hello-world.png",
-                height: size.height * 0.2,
-              ),
-            ),
-          ]),
+        child: const SingleChildScrollView(
+          child: WelcomeImage()
         ),
       ),
       Container(
@@ -177,5 +160,28 @@ class WelcomePage extends StatelessWidget {
       ),
       //   SizedBox(height: size.height*0.2,),
     ]));
+  }
+}
+
+class WelcomeImage extends StatelessWidget {
+  const WelcomeImage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(children: [
+      Center(
+        child: Text(
+          "Welcome!",
+          style: GoogleFonts.nunito(
+              color: Colors.white, fontSize: 60, fontWeight: FontWeight.w900),
+        ),
+      ),
+      Center(
+        child: Image.asset(
+          "assets/hello-world.png",
+          height: deviceHeight * 0.2,
+        ),
+      ),
+    ]);
   }
 }
