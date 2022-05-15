@@ -132,6 +132,7 @@ class HomePage_ extends State<HomePage> {
                       child: SingleChildScrollView(
                         child: Column(children: [
                           SizedBox(
+                            //
                             height: deviceHeight * 0.5,
                           ),
                           Center(
