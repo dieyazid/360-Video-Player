@@ -2,10 +2,11 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:myapp/screens/activation.dart';
-import 'package:myapp/screens/welcome.dart';
-import 'package:myapp/redux/actions.dart';
-import 'package:myapp/redux/appstate.dart';
+import 'package:myapp/components/topsection.dart';
+import 'package:myapp/screens/Activation_Screen/activation.dart';
+import 'package:myapp/screens/Welcome_Screen/welcome.dart';
+import 'package:myapp/Redux/actions.dart';
+import 'package:myapp/Redux/appstate.dart';
 
 class SignupForm extends StatefulWidget {
   const SignupForm({Key? key}) : super(key: key);

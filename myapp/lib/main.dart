@@ -1,13 +1,11 @@
 // ignore_for_file: constant_identifier_names
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:myapp/screens/splash.dart';
-import 'package:myapp/screens/welcome.dart';
-import 'package:myapp/redux/reducers.dart';
-import 'package:myapp/redux/actions.dart';
-import 'package:myapp/redux/appstate.dart';
+import 'package:myapp/screens/Splash_Screen/splash.dart';
+import 'package:myapp/screens/Welcome_Screen/welcome.dart';
+import 'package:myapp/Redux/reducers.dart';
+import 'package:myapp/Redux/appstate.dart';
 import 'package:redux/redux.dart';
 
 void main() {

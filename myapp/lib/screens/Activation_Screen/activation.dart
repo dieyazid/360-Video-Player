@@ -4,9 +4,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:myapp/screens/home.dart';
-import 'package:myapp/screens/welcome.dart';
-import 'package:myapp/redux/appstate.dart';
+import 'package:myapp/components/topsection.dart';
+import 'package:myapp/screens/Home_Screen/home.dart';
+import 'package:myapp/screens/Welcome_Screen/welcome.dart';
+import 'package:myapp/Redux/appstate.dart';
 
 class ActivationPage extends StatefulWidget {
   // final String usermail;
@@ -233,57 +234,3 @@ class ActivationPage_ extends State<ActivationPage> {
   }
 }
 
-class TopSection extends StatelessWidget {
-  const TopSection({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    return Container(
-      height: deviceHeight / 16,
-      color: Colors.transparent,
-      // padding: const EdgeInsets.all(10),
-      child: Row(
-        children: [
-          SizedBox(
-            height: deviceHeight * 0.001,
-          ),
-          Container(
-            height: 50,
-            width: 80,
-            decoration: const BoxDecoration(
-                // boxShadow: [
-                //   BoxShadow(
-                //     color: Colors.grey,
-                //     blurRadius: 4,
-                //     offset: Offset(0, 4),
-                //   )
-                // ],
-                borderRadius: BorderRadius.all(
-              Radius.circular(10),
-            )),
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) {
-                    return const WelcomePage();
-                  }),
-                );
-              },
-              child: const Icon(
-                Icons.arrow_back,
-                size: 26,
-              ),
-              style: ElevatedButton.styleFrom(
-                shape: const CircleBorder(),
-                padding: const EdgeInsets.all(10),
-                primary: base_color,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}

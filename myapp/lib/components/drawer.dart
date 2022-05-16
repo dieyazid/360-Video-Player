@@ -2,9 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:myapp/redux/appstate.dart';
-import 'package:myapp/screens/home.dart';
-import 'package:myapp/screens/welcome.dart';
+import 'package:myapp/Redux/appstate.dart';
+import 'package:myapp/screens/Welcome_Screen/welcome.dart';
 
 class DrawerList extends StatelessWidget {
   const DrawerList({Key? key}) : super(key: key);

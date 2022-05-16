@@ -1,5 +1,5 @@
-import 'package:myapp/redux/appstate.dart';
-import 'package:myapp/redux/actions.dart';
+import 'package:myapp/Redux/appstate.dart';
+import 'package:myapp/Redux/actions.dart';
 
 AppState reducer(AppState prevState, dynamic action) {
   AppState newState = AppState.fromAppState(prevState);
@@ -11,7 +11,7 @@ AppState reducer(AppState prevState, dynamic action) {
   } 
   if (action is VideosList_action) {
     newState.VideosList_state = action.payload;
-  } 
+  }
   return newState;
   }
 

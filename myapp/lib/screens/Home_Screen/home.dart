@@ -3,12 +3,13 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:myapp/components/drawer.dart';
-import 'package:myapp/redux/appstate.dart';
-import 'package:myapp/screens/player.dart';
-import 'package:myapp/screens/welcome.dart';
+import 'package:myapp/Redux/appstate.dart';
+import 'package:myapp/screens/Player_Screen/player.dart';
+import 'package:myapp/screens/Welcome_Screen/welcome.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -20,7 +21,7 @@ class HomePage_ extends State<HomePage> {
   List Videos = [];
   var Responsehttp;
   var ResponseCode;
-  String url = "http://localhost:3000/videos";
+  String url = "http://192.168.1.12:3000/videos";
   getData() async {
     try {
       Responsehttp = await http.get(Uri.parse(url));
@@ -106,23 +107,27 @@ class HomePage_ extends State<HomePage> {
                       child: SingleChildScrollView(
                         child: Column(children: [
                           SizedBox(
-                            height: deviceHeight * 0.5,
+                            height: deviceHeight /3,
                           ),
                           Center(
                             child: Text(
                               "There are no videos available right now",
+                              textAlign: TextAlign.center,
                               style: GoogleFonts.nunito(
                                   color: Colors.black,
-                                  fontSize: 30,
+                                  fontSize: 22,
                                   fontWeight: FontWeight.w900),
                             ),
                           ),
-                          // const SizedBox(
-                          //   // height: deviceHeight - (deviceHeight / 12 + 15),
-                          //   child: Center(
-                          //     child: CircularProgressIndicator(),
-                          //   ),
-                          // ),
+                          const SizedBox(
+                            // height: deviceHeight - (deviceHeight / 12 + 15),
+                            child: Center(
+                              child: SpinKitCircle(
+                                size: 100,
+                                color: Colors.black,
+                              )
+                            ),
+                          ),
                         ]),
                       ),
                     );
@@ -132,22 +137,25 @@ class HomePage_ extends State<HomePage> {
                       child: SingleChildScrollView(
                         child: Column(children: [
                           SizedBox(
-                            //
-                            height: deviceHeight * 0.5,
+                            height: deviceHeight /3,
                           ),
                           Center(
                             child: Text(
-                              "We lost connection to the server",
+                              "Could not connect to the server please refresh",
+                              textAlign: TextAlign.center,
                               style: GoogleFonts.nunito(
                                   color: Colors.black,
-                                  fontSize: 30,
+                                  fontSize: 22,
                                   fontWeight: FontWeight.w900),
                             ),
                           ),
                           const SizedBox(
                             // height: deviceHeight - (deviceHeight / 12 + 15),
                             child: Center(
-                              child: CircularProgressIndicator(),
+                              child: SpinKitDoubleBounce(
+                                size: 140,
+                                color: Colors.black,
+                              )
                             ),
                           ),
                         ]),
