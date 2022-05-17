@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/components/drawer.dart';
 import 'package:myapp/screens/Home_Screen/home.dart';
 import 'package:myapp/screens/Welcome_Screen/welcome.dart';
-import 'package:video_player/video_player.dart';
+import 'package:ext_video_player/ext_video_player.dart';
 
 class PlayerPage extends StatefulWidget {
   // final String videotitle, videoduration;
@@ -127,7 +127,7 @@ class _VideoAppState extends State<VideoApp> {
           child: Stack(
             children: [
                Center(
-                child: _controller.value.isInitialized
+                child: _controller.value.initialized
                     ? AspectRatio(
                         aspectRatio: _controller.value.aspectRatio,
                         
