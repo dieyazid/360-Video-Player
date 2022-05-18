@@ -11,10 +11,6 @@ const second_color = Color(0xFFcfd2db);
 var deviceWidth;
 var deviceHeight;
 
-
-
-
-
 class WelcomePage extends StatelessWidget {
   const WelcomePage({Key? key}) : super(key: key);
 

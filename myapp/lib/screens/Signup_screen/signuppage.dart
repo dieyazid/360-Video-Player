@@ -2,10 +2,10 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:myapp/components/buttons.dart';
 import 'package:myapp/components/topsection.dart';
 import 'package:myapp/screens/Activation_Screen/activation.dart';
 import 'package:myapp/screens/Welcome_Screen/welcome.dart';
-import 'package:myapp/Redux/actions.dart';
 import 'package:myapp/Redux/appstate.dart';
 
 class SignupForm extends StatefulWidget {
@@ -33,9 +33,8 @@ class SignUpPage extends StatelessWidget {
   }
 }
 
-  // ##########################################
+// ##########################################
 class SignupForm_ extends State<SignupForm> {
-
   final formKey = GlobalKey<FormState>();
   final textfieldfocus = FocusNode();
 
@@ -44,7 +43,7 @@ class SignupForm_ extends State<SignupForm> {
   TextEditingController username = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController confirmpassword = TextEditingController();
-  
+
   //###Variables##
   bool _isPasswordEightCharacters = false;
   bool _hasPasswordOneNumber = false;
@@ -361,40 +360,13 @@ class SignupForm_ extends State<SignupForm> {
                   SizedBox(
                     height: deviceHeight * 0.03,
                   ),
-                  Center(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(29),
-                      child: ElevatedButton(
-                        onPressed: () {
-                          final FormisValid = formKey.currentState!.validate();
-                          if (FormisValid) {
-                            StoreProvider.of<AppState>(context)
-                                .dispatch(Usermail_action(usermail.text));
-                            StoreProvider.of<AppState>(context)
-                                .dispatch(Username_action(username.text));
-                            Navigator.of(context).pushAndRemoveUntil(
-                                MaterialPageRoute(
-                                    builder: (context) => const ActivationPage(
-                                        // usermail: usermail.text,
-                                        )),
-                                (route) => false);
-                          }
-                        },
-                        style: ElevatedButton.styleFrom(
-                          // shape: const CircleBorder(),
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 20, horizontal: 80),
-                          primary: base_color,
-                        ),
-                        child: Text(
-                          "SIGN UP",
-                          style: GoogleFonts.nunito(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w800),
-                        ),
-                      ),
-                    ),
+                  FormButton(
+                    buttontext: 'Sign Up',
+                    nextpage: const ActivationPage(),
+                    formKey: formKey,
+                    sourcepage: "signuppage",
+                    usermail:usermail.text,
+                    username: username.text,
                   ),
                   const SizedBox(
                     height: 40,
