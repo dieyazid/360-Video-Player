@@ -9,7 +9,7 @@
 * Repository https://github.com/medbenzekri/Spring-streamserver
 
 ## Dependencies
-# Flutter dependencies
+### Flutter dependencies
 
 
 ## Run The application (Backend)
