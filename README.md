@@ -10,8 +10,21 @@
 
 ## Dependencies
 ### Flutter dependencies
-
-
+```sh
+  cupertino_icons: ^1.0.2
+  google_fonts: ^2.3.1
+  http: any
+  animated_splash_screen: ^1.2.0
+  lottie: ^1.3.0
+  email_validator: ^2.0.1
+  flutter_custom_clippers: ^2.0.0
+  redux: ^5.0.0
+  flutter_redux: ^0.9.0
+  dio: ^4.0.6
+  flutter_spinkit: ^5.1.0
+  ext_video_player: ^0.1.2
+  motion_sensors: ^0.1.0
+```
 ## Run The application (Backend)
 Not yet available...
 
