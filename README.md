@@ -1,4 +1,4 @@
-<h1 align="center">Welcome to Design and development of a mobile application to display a panorama video based on the accelerometer sensor 👋</h1>
+<h1 align="center">Design and development of a mobile application to display a panorama video based on the accelerometer sensor</h1>
 <p>
 </p>
 
