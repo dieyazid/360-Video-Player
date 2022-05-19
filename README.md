@@ -9,7 +9,8 @@
 * Repository https://github.com/medbenzekri/Spring-streamserver
 
 ## Dependencies
-Not yet available...
+# Flutter dependencies
+
 
 ## Run The application (Backend)
 Not yet available...
