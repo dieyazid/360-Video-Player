@@ -3,10 +3,10 @@
 </p>
 
 ## Frontend
-* Repository :[@mohammedyazid](https://github.com/mohammedyazid/360-Video-Player)
+* Repository https://github.com/mohammedyazid/360-Video-Player
 
 ## Backend
-* Repository :[@medbenzekri](https://github.com/medbenzekri/Spring-streamserver)
+* Repository https://github.com/medbenzekri/Spring-streamserver
 
 ## Dependencies
 Not yet available...
