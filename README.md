@@ -55,5 +55,8 @@ flutter test "testfilename".dart
 ## Supervised By
 👤 **Mr Bouzerita**
 
+## Note
+This app works only on Android so you might face some problems loading it on linux or web.
+
 
 
