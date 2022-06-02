@@ -8,23 +8,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:myapp/Redux/appstate.dart';
-import 'package:myapp/Redux/reducers.dart';
-import 'package:myapp/screens/Home_Screen/home.dart';
+import 'package:myapp/Redux/store.dart';
 import 'package:myapp/screens/Login_Screen/login.dart';
 import 'package:myapp/screens/Welcome_Screen/welcome.dart';
-import 'package:redux/redux.dart';
 
 void main() {
   Widget createWidgetForTesting({required Widget child}) {
-    final _initialState =
-        AppState(Usermail_state: "", Username_state: "", VideosList_state: []);
-    final Store<AppState> _store =
-        Store<AppState>(reducer, initialState: _initialState);
     return StoreProvider<AppState>(
-      store: _store,
-      child: MaterialApp(
-        home: child,
-      ),
+      store: store,
+     child: MaterialApp(
+      home: child,
+    ),
     );
   }
 

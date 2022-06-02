@@ -12,6 +12,12 @@ AppState reducer(AppState prevState, dynamic action) {
   if (action is VideosList_action) {
     newState.VideosList_state = action.payload;
   }
+  if (action is Url_action) {
+    newState.Url_state = action.payload;
+  }
+  if (action is Controller_action) {
+    newState.Controller_state = action.payload;
+  }
   return newState;
   }
 

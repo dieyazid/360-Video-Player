@@ -1,4 +1,4 @@
-// ignore_for_file: constant_identifier_names
+// ignore_for_file: constant_identifier_names, use_key_in_widget_constructors
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -7,13 +7,12 @@ import 'package:myapp/screens/Welcome_Screen/welcome.dart';
 import 'package:myapp/Redux/reducers.dart';
 import 'package:myapp/Redux/appstate.dart';
 import 'package:redux/redux.dart';
+import 'package:myapp/Redux/store.dart';
 
 void main() {
-  final _initialState =
-      AppState(Usermail_state: "", Username_state: "", VideosList_state: []);
-  final Store<AppState> _store =
-      Store<AppState>(reducer, initialState: _initialState);
-  runApp(MyApp(store: _store));
+  // final Store<AppState> _store = Store<AppState>(reducer, initialState: _initialState);
+  runApp(MyApp(store: store));
+  // _store
 }
 
 class MyApp extends StatelessWidget {

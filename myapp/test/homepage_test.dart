@@ -8,24 +8,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:myapp/Redux/appstate.dart';
-import 'package:myapp/Redux/reducers.dart';
 import 'package:myapp/screens/Home_Screen/home.dart';
-import 'package:myapp/screens/Login_Screen/login.dart';
 import 'package:myapp/screens/Signup_screen/signuppage.dart';
 import 'package:myapp/screens/Welcome_Screen/welcome.dart';
-import 'package:redux/redux.dart';
+import 'package:myapp/Redux/store.dart';
 
 void main() {
   Widget createWidgetForTesting({required Widget child}) {
-    final _initialState =
-        AppState(Usermail_state: "", Username_state: "", VideosList_state: []);
-    final Store<AppState> _store =
-        Store<AppState>(reducer, initialState: _initialState);
+
     return StoreProvider<AppState>(
-      store: _store,
-      child: MaterialApp(
-        home: child,
-      ),
+      store: store,
+     child: MaterialApp(
+      home: child,
+    ),
     );
   }
 
@@ -34,24 +29,21 @@ void main() {
     await tester.pumpWidget(createWidgetForTesting(child: const HomePage()));
     // Testing to see if the widget is built correctly
     expect(find.byType(Container), findsWidgets);
-    
+
     // Testing Buttons:
 
     //Login Redirect Button
-    await tester.tap(
-      find.byKey(const Key("refresh_button")));
+    await tester.tap(find.byKey(const Key("refresh_button")));
     await tester.pump();
     expect(find.byType(HomePage), findsOneWidget);
-    
+
     // Back button in The login page
-    await tester.tap(
-      find.byKey(const Key("back_button")));
+    await tester.tap(find.byKey(const Key("back_button")));
     await tester.pumpAndSettle();
-    
+
     // Back button in The signup page
-    await tester.tap(
-      find.byKey(const Key("redirect_signuppage")),
-    warnIfMissed: false);
+    await tester.tap(find.byKey(const Key("redirect_signuppage")),
+        warnIfMissed: false);
     await tester.pumpAndSettle();
     expect(find.byType(SignUpPage), findsOneWidget);
   });

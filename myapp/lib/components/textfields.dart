@@ -20,12 +20,14 @@ class _PasswordFieldState extends State<PasswordField> {
       textfieldfocus.canRequestFocus = false;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Center(
         child: SizedBox(
       width: deviceWidth * 0.7,
       child: TextFormField(
+        key: const Key("PasswordTextfield"),
         validator: (password) {
           if (password!.length < 8) {
             return 'Invalid Password';
@@ -82,6 +84,7 @@ class EmailField extends StatelessWidget {
         child: SizedBox(
       width: deviceWidth * 0.7,
       child: TextFormField(
+        key: const Key("EmailTextfield"),
         validator: (email) => email != null && !EmailValidator.validate(email)
             ? 'Invalid Email'
             : null,

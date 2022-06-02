@@ -6,42 +6,37 @@ import 'package:myapp/Redux/actions.dart';
 import 'package:myapp/Redux/appstate.dart';
 import 'package:myapp/screens/Welcome_Screen/welcome.dart';
 
-
-
 class Button extends StatelessWidget {
   Button(
-      {required this.buttontext,
+      { this.widgetKey="",
+      required this.buttontext,
       required this.nextpage,
       this.button_color = base_color,
       this.text_color = Colors.white});
-  String buttontext;
+  String buttontext,widgetKey;
   Widget nextpage;
   Color button_color, text_color;
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(29),
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) {
-                return nextpage;
-              }),
-            );
-          },
-          style: ElevatedButton.styleFrom(
-            // shape: const CircleBorder(),
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 80),
-            primary: button_color,
-          ),
-          child: Text(
-            buttontext,
-            style: GoogleFonts.nunito(
-                color: text_color, fontSize: 20, fontWeight: FontWeight.w800),
-          ),
-        ),
+    return ElevatedButton(
+      key: Key(widgetKey),
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) {
+            return nextpage;
+          }),
+        );
+      },
+      style: ElevatedButton.styleFrom(
+        // shape: const CircleBorder(),
+        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 80),
+        primary: button_color,
+      ),
+      child: Text(
+        buttontext,
+        style: GoogleFonts.nunito(
+            color: text_color, fontSize: 20, fontWeight: FontWeight.w800),
       ),
     );
   }
@@ -49,13 +44,13 @@ class Button extends StatelessWidget {
 
 class FormButton extends StatelessWidget {
   FormButton(
-      {required this.buttontext,
+      {this.widgetKey="",required this.buttontext,
       required this.nextpage,
       required this.formKey,
       required this.sourcepage,
       this.username = "",
       this.usermail = ""});
-  String buttontext, sourcepage, username, usermail;
+  String buttontext, sourcepage, username, usermail,widgetKey;
   Widget nextpage;
   GlobalKey<FormState> formKey;
   @override
@@ -67,6 +62,7 @@ class FormButton extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(29),
               child: ElevatedButton(
+                key: Key(widgetKey),
                 onPressed: () {
                   final FormisValid = formKey.currentState!.validate();
                   if (FormisValid) {
@@ -78,7 +74,11 @@ class FormButton extends StatelessWidget {
                       Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(builder: (context) => nextpage),
                           (route) => false);
-                    } else {
+                    } else if (sourcepage == "loginpage") {
+                      Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(builder: (context) => nextpage),
+                          (route) => false);
+                    } else if (sourcepage == "activation") {
                       Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(builder: (context) => nextpage),
                           (route) => false);
