@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:myapp/screens/Splash_Screen/splash.dart';
 import 'package:myapp/screens/Welcome_Screen/welcome.dart';
-import 'package:myapp/Redux/reducers.dart';
 import 'package:myapp/Redux/appstate.dart';
 import 'package:redux/redux.dart';
 import 'package:myapp/Redux/store.dart';

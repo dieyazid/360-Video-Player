@@ -1,6 +1,6 @@
 // ignore_for_file: camel_case_types
 
-import 'package:ext_video_player/ext_video_player.dart';
+// import 'package:ext_video_player/ext_video_player.dart';
 
 class Usermail_action {
   final String payload;
@@ -22,7 +22,7 @@ class Url_action {
   final String payload;
   Url_action(this.payload);
 }
-class Controller_action {
-  final VideoPlayerController payload;
-  Controller_action(this.payload);
-}
+// class Controller_action {
+//   final VideoPlayerController payload;
+//   Controller_action(this.payload);
+// }

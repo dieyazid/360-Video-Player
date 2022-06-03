@@ -1,6 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'package:ext_video_player/ext_video_player.dart';
+// import 'package:ext_video_player/ext_video_player.dart';
 
 class AppState {
   late List VideosList_state = [];
@@ -8,8 +8,8 @@ class AppState {
   late String Username_state = "Guest";
   late String Url_state =
       'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4';
-  late VideoPlayerController Controller_state =
-      VideoPlayerController.network('');
+  // late VideoPlayerController Controller_state =
+  //     VideoPlayerController.network('');
   AppState();
   // this.Usermail_state);
 // required this.Usermail_state,

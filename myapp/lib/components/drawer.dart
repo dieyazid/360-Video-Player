@@ -46,6 +46,33 @@ class DrawerList extends StatelessWidget {
         SizedBox(
           height: 45,
           child: ElevatedButton(
+            onPressed: () {},
+            child: Row(children: const [
+              Icon(
+                Icons.upload,
+                color: Colors.black,
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              Text(
+                'Upload',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.black,
+                ),
+              ),
+            ]),
+            style: ElevatedButton.styleFrom(primary: Colors.white),
+          ),
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        SizedBox(
+          height: 45,
+          child: ElevatedButton(
             onPressed: () {
               Navigator.push(
                 context,
@@ -74,6 +101,7 @@ class DrawerList extends StatelessWidget {
             style: ElevatedButton.styleFrom(primary: Colors.white),
           ),
         ),
+        
       ],
     );
   }
