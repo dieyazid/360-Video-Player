@@ -64,3 +64,6 @@ To run tests, run the following command
 - [@mohammedyazid](https://github.com/mohammedyazid)
 ## Backend Dev
 - [@medbenzekri](https://github.com/mohammedyazid)
+
+# Note 
+Please consider that this is an uncompleted repository
