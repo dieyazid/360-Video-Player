@@ -11,7 +11,7 @@ https://github.com/medbenzekri/Spring-streamserver
 
 ## Screenshots
 
-![App Screenshot](https://github.com/mohammedyazid/Assets/blob/main/screens.png)
+![App Screenshot](https://github.com/mohammedyazid/Assets/blob/main/Img/screens.png)
 
 ## Color Reference
 
